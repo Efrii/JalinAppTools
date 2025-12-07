@@ -166,12 +166,13 @@ namespace JalinTools.Services
                 var lines = await File.ReadAllLinesAsync(inputPath);
                 var output = new StringBuilder();
                 var existingLines = new HashSet<string>();
+                var cdmProcessor = new CDMProcessor();
 
                 bool skipSupervisorSession = false;
 
                 foreach (var line in lines)
                 {
-                    // Skip supervisor sessions (lines 338-351)
+                    // Skip supervisor sessions
                     if (line.Contains("SUPERVISOR SAFE OPEN"))
                     {
                         skipSupervisorSession = true;
@@ -190,20 +191,49 @@ namespace JalinTools.Services
                         }
                     }
 
-                    // Skip specific lines (lines 354-356)
+                    //Skip specific lines
                     if (ShouldSkipLine(line))
                         continue;
 
-                    // Check if line should be included (lines 359-401)
-                    if (ShouldIncludeLine(line))
+                    // Try to process as Cassette XML first
+                    if (CassetteDetector.IsCassetteData(line))
+                    {
+                        string cassetteReport = CassetteDetector.ProcessCassetteXML(line);
+                        if (!string.IsNullOrEmpty(cassetteReport))
+                        {
+                            output.AppendLine();
+                            output.AppendLine(cassetteReport);
+                            output.AppendLine();
+                        }
+                        continue; // Skip adding the raw XML line
+                    }
+
+                    // Try to process as CDM transaction
+                    if (cdmProcessor.IsCDMData(line))
+                    {
+                        string cdmOutput = cdmProcessor.ProcessLine(line);
+                        if (!string.IsNullOrEmpty(cdmOutput) && !existingLines.Contains(cdmOutput))
+                        {
+                            if (IsTransactionStart(cdmOutput))
+                            {
+                                string separator = GetTransactionSeparator(line);
+                                output.Append(separator);
+                            }
+                            
+                            output.AppendLine(cdmOutput);
+                            existingLines.Add(cdmOutput);
+                        }
+                    }
+                    // Otherwise check if line should be included
+                    else if (ShouldIncludeLine(line))
                     {
                         // Filter and format line
                         string filteredLine = FilterLine(line);
 
-                        // Avoid duplicates (lines 390-400)
+                        // Avoid duplicates
                         if (!existingLines.Contains(filteredLine))
                         {
-                            // Add transaction separator if needed (lines 391-395)
+                            // Add transaction separator if needed
                             if (IsTransactionStart(filteredLine))
                             {
                                 string separator = GetTransactionSeparator(line);
