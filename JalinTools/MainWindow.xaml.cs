@@ -1,5 +1,4 @@
 using System.Windows;
-using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 
 namespace JalinTools
@@ -23,20 +22,6 @@ namespace JalinTools
             StateChanged += (s, e) => UpdateMaximizeIcon();
         }
 
-        private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-            {
-                // Double click to maximize/restore
-                MaximizeButton_Click(sender, e);
-            }
-            else
-            {
-                // Single click to drag
-                DragMove();
-            }
-        }
-
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -44,14 +29,9 @@ namespace JalinTools
 
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
-            {
-                WindowState = WindowState.Normal;
-            }
-            else
-            {
-                WindowState = WindowState.Maximized;
-            }
+            WindowState = WindowState == WindowState.Maximized 
+                ? WindowState.Normal 
+                : WindowState.Maximized;
             UpdateMaximizeIcon();
         }
 

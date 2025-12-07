@@ -315,10 +315,12 @@ namespace JalinTools.ViewModels
             {
                 try
                 {
+                    // Open with notepad explicitly
                     System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
                     {
-                        FileName = CurrentOutputPath,
-                        UseShellExecute = true
+                        FileName = "notepad.exe",
+                        Arguments = $"\"{CurrentOutputPath}\"",
+                        UseShellExecute = false
                     });
                 }
                 catch (Exception ex)
@@ -341,11 +343,34 @@ namespace JalinTools.ViewModels
         }
 
         /// <summary>
-        /// Toggle preview panel expansion
+        /// Toggle preview panel expansion - opens fullscreen popup
         /// </summary>
         private void ToggleExpand()
         {
-            IsPreviewExpanded = !IsPreviewExpanded;
+            if (!string.IsNullOrEmpty(PreviewContent) && !string.IsNullOrEmpty(CurrentOutputPath))
+            {
+                try
+                {
+                    // Read full file content for popup
+                    var fullContent = System.IO.File.ReadAllText(CurrentOutputPath);
+                    
+                    // Open fullscreen preview window
+                    var previewWindow = new Views.PreviewWindow(fullContent, CurrentOutputPath)
+                    {
+                        Owner = Application.Current.MainWindow
+                    };
+                    
+                    previewWindow.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        $"Gagal membuka preview:\n\n{ex.Message}",
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
         }
 
         /// <summary>
