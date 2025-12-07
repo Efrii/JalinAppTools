@@ -8,7 +8,6 @@ namespace JalinTools.Services
 {
     /// <summary>
     /// Detects and formats cassette information from XML data
-    /// Based on C++ cassette_detector implementation
     /// </summary>
     public class CassetteDetector
     {

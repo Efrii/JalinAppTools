@@ -6,7 +6,6 @@ using JalinTools.Models;
 namespace JalinTools.Services
 {
     /// <summary>
-    /// Process CDM transactions to match C++ implementation
     /// </summary>
     public class CDMProcessor
     {
