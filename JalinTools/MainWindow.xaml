@@ -8,23 +8,152 @@
         Width="1000"
         MinHeight="700"
         MinWidth="900"
-        Background="#F5F5F5"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="SingleBorderWindow">
+        WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <viewmodels:NavigationViewModel/>
     </Window.DataContext>
 
-    <Grid>
-        <!-- Main Navigation Frame -->
-        <Frame Content="{Binding CurrentPage}" 
-               NavigationUIVisibility="Hidden"/>
-    </Grid>
+    <!-- Window Border with Shadow -->
+    <Border Background="#F5F5F5" 
+            CornerRadius="10"
+            BorderBrush="#E0E0E0" 
+            BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" 
+                              BlurRadius="20" 
+                              Opacity="0.3" 
+                              Color="Black"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Custom Title Bar -->
+            <Border Grid.Row="0" 
+                    Background="#DB4231" 
+                    CornerRadius="10,10,0,0"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                    Height="50">
+                <Grid Margin="20,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Logo and Title -->
+                    <StackPanel Grid.Column="0" 
+                                Orientation="Horizontal" 
+                                VerticalAlignment="Center">
+                        <!-- App Icon -->
+                        <Image Source="/Resources/icon.ico" 
+                               Width="28" 
+                               Height="28" 
+                               Margin="0,0,12,0"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        
+                        <!-- JalinTools Text Logo -->
+                        <TextBlock FontSize="20" 
+                                   FontWeight="Bold" 
+                                   Foreground="White"
+                                   VerticalAlignment="Center">
+                            <TextBlock.Effect>
+                                <DropShadowEffect ShadowDepth="1" 
+                                                  BlurRadius="3" 
+                                                  Opacity="0.3"
+                                                  Color="Black"/>
+                            </TextBlock.Effect>
+                            <Run Text="Jalin" FontWeight="ExtraBold"/><!--
+                         --><Run Text="Tools" FontWeight="Light"/>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!-- Window Title (optional - shows current page) -->
+                    <TextBlock Grid.Column="1" 
+                               Text="" 
+                               FontSize="14" 
+                               Foreground="White" 
+                               Opacity="0.9"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontWeight="Medium"/>
+
+                    <!-- Window Controls -->
+                    <StackPanel Grid.Column="2" 
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <!-- Minimize Button -->
+                        <Button Click="MinimizeButton_Click"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Width="46"
+                                Height="32"
+                                Padding="0"
+                                Foreground="White"
+                                ToolTip="Minimize">
+                            <materialDesign:PackIcon Kind="WindowMinimize" 
+                                                     Width="20" 
+                                                     Height="20"/>
+                        </Button>
+
+                        <!-- Maximize/Restore Button -->
+                        <Button x:Name="MaximizeButton"
+                                Click="MaximizeButton_Click"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Width="46"
+                                Height="32"
+                                Padding="0"
+                                Foreground="White"
+                                ToolTip="Maximize">
+                            <materialDesign:PackIcon x:Name="MaximizeIcon"
+                                                     Kind="WindowMaximize" 
+                                                     Width="20" 
+                                                     Height="20"/>
+                        </Button>
+
+                        <!-- Close Button -->
+                        <Button Click="CloseButton_Click"
+                                Width="46"
+                                Height="32"
+                                Padding="0"
+                                Foreground="White"
+                                ToolTip="Close">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#C62828"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <materialDesign:PackIcon Kind="Close" 
+                                                     Width="20" 
+                                                     Height="20"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Main Content -->
+            <Grid Grid.Row="1" Background="#F5F5F5">
+                <!-- Main Navigation Frame -->
+                <Frame Content="{Binding CurrentPage}" 
+                       NavigationUIVisibility="Hidden"/>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

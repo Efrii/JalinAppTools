@@ -267,11 +267,11 @@
 
                 <!-- Info Footer -->
                 <StackPanel Margin="0,60,0,0" HorizontalAlignment="Center">
-                    <TextBlock Text="Parser Electronic Journal EFTS &amp; Perangkat Lainnya" 
+                    <TextBlock Text="Tools untuk memudahkan analisis data EFTS" 
                                FontSize="12" 
                                Foreground="#9E9E9E"
                                HorizontalAlignment="Center"/>
-                    <TextBlock Text="© 2025 JalinTools" 
+                    <TextBlock Text="© 2025 Cash Point Channel Solution" 
                                FontSize="11" 
                                Foreground="#BDBDBD"
                                HorizontalAlignment="Center"
