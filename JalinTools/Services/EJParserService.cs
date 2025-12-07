@@ -47,7 +47,7 @@ namespace JalinTools.Services
         }
 
         /// <summary>
-        /// Process file with Standard format (CSV output with transaction buffering)
+        /// Process file with Standard format (TXT output with transaction buffering)
         /// </summary>
         private async Task<bool> ProcessStandardFormatAsync(
             string inputPath,
@@ -60,7 +60,7 @@ namespace JalinTools.Services
                 var lines = await File.ReadAllLinesAsync(inputPath);
                 var output = new StringBuilder();
 
-                // Write CSV header
+                // Write TXT header
                 output.AppendLine("TID|Trace Number|Participant ID|Transaction Time|Journal Time|text");
 
                 var bufferedLines = new List<BufferedLine>();

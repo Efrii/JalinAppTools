@@ -6,7 +6,7 @@ namespace JalinTools.Models
     public enum EJParserFormat
     {
         /// <summary>
-        /// Standard format: CSV output with pipe delimiter and transaction buffering
+        /// Standard format: TXT output with pipe delimiter and transaction buffering
         /// </summary>
         Standard,
 

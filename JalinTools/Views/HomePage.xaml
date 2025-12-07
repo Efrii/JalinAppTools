@@ -71,9 +71,14 @@
                         <ColumnDefinition Width="20"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
                     <!-- Kartu Alat EJ Parser -->
-                    <materialDesign:Card Grid.Column="0" 
+                    <materialDesign:Card Grid.Column="0" Grid.Row="0"
                                          Padding="30" 
                                          UniformCornerRadius="12"
                                          materialDesign:ElevationAssist.Elevation="Dp4">
@@ -92,14 +97,14 @@
                                        HorizontalAlignment="Center"
                                        Margin="0,0,0,10"/>
                             
-                            <TextBlock Text="Memproses file Electronic Journal menjadi format tertentu" 
+                            <TextBlock Text="Parse EJ EFTS format JALIN" 
                                        FontSize="14" 
                                        Foreground="#757575"
                                        TextWrapping="Wrap"
                                        TextAlignment="Center"
                                        Margin="0,0,0,25"/>
                             
-                            <Button Content="BUKA ALAT" 
+                            <Button Content="BUKA" 
                                     Click="OpenEJParser_Click"
                                     Height="45"
                                     FontSize="14"
@@ -121,35 +126,135 @@
                         </StackPanel>
                     </materialDesign:Card>
 
-                    <!-- Kartu Segera Hadir -->
-                    <materialDesign:Card Grid.Column="2" 
+                    <!-- Kartu Parser EJ NCR -->
+                    <materialDesign:Card Grid.Column="2" Grid.Row="0"
                                          Padding="30" 
                                          UniformCornerRadius="12"
                                          materialDesign:ElevationAssist.Elevation="Dp2"
-                                         Opacity="0.6">
+                                         Opacity="0.7">
                         <StackPanel>
-                            <materialDesign:PackIcon Kind="Wrench" 
+                            <materialDesign:PackIcon Kind="FileDocumentOutline" 
                                                      Width="60" 
                                                      Height="60" 
                                                      Foreground="#9E9E9E"
                                                      HorizontalAlignment="Center"
                                                      Margin="0,0,0,20"/>
                             
-                            <TextBlock Text="Alat Lainnya" 
-                                       FontSize="24" 
-                                       FontWeight="SemiBold" 
-                                       Foreground="#212121"
-                                       HorizontalAlignment="Center"
-                                       Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,5">
+                                <TextBlock Text="Parser EJ NCR" 
+                                           FontSize="24" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#212121"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,8,0"/>
+                                <Border Background="#FF9800" CornerRadius="8" Padding="6,2">
+                                    <TextBlock Text="SEGERA" 
+                                               FontSize="10" 
+                                               FontWeight="Bold"
+                                               Foreground="White"/>
+                               </Border>
+                            </StackPanel>
                             
-                            <TextBlock Text="Alat tambahan akan segera hadir..." 
+                            <TextBlock Text="Parse EJ Native format NCR APTRA" 
                                        FontSize="14" 
                                        Foreground="#757575"
                                        TextWrapping="Wrap"
                                        TextAlignment="Center"
                                        Margin="0,0,0,25"/>
                             
-                            <Button Content="SEGERA HADIR" 
+                            <Button Content="DALAM PENGEMBANGAN" 
+                                    IsEnabled="False"
+                                    Height="45"
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    HorizontalAlignment="Stretch"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        </StackPanel>
+                    </materialDesign:Card>
+
+                    <!-- Kartu Parser EJ Hyosung -->
+                    <materialDesign:Card Grid.Column="0" Grid.Row="2"
+                                         Padding="30" 
+                                         UniformCornerRadius="12"
+                                         materialDesign:ElevationAssist.Elevation="Dp2"
+                                         Opacity="0.7">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="FileDocumentOutline" 
+                                                     Width="60" 
+                                                     Height="60" 
+                                                     Foreground="#9E9E9E"
+                                                     HorizontalAlignment="Center"
+                                                     Margin="0,0,0,20"/>
+                            
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,5">
+                                <TextBlock Text="Parser EJ Hyosung" 
+                                           FontSize="24" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#212121"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,8,0"/>
+                                <Border Background="#FF9800" CornerRadius="8" Padding="6,2">
+                                    <TextBlock Text="SEGERA" 
+                                               FontSize="10" 
+                                               FontWeight="Bold"
+                                               Foreground="White"/>
+                                </Border>
+                            </StackPanel>
+                            
+                            <TextBlock Text="Parse EJ Native format Hyosung MoniPlus" 
+                                       FontSize="14" 
+                                       Foreground="#757575"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       Margin="0,0,0,25"/>
+                            
+                            <Button Content="DALAM PENGEMBANGAN" 
+                                    IsEnabled="False"
+                                    Height="45"
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    HorizontalAlignment="Stretch"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        </StackPanel>
+                    </materialDesign:Card>
+
+                    <!-- Kartu Parser EJ Wincor -->
+                    <materialDesign:Card Grid.Column="2" Grid.Row="2"
+                                         Padding="30" 
+                                         UniformCornerRadius="12"
+                                         materialDesign:ElevationAssist.Elevation="Dp2"
+                                         Opacity="0.7">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="FileDocumentOutline" 
+                                                     Width="60" 
+                                                     Height="60" 
+                                                     Foreground="#9E9E9E"
+                                                     HorizontalAlignment="Center"
+                                                     Margin="0,0,0,20"/>
+                            
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,5">
+                                <TextBlock Text="Parser EJ Wincor" 
+                                           FontSize="24" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#212121"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,8,0"/>
+                                <Border Background="#FF9800" CornerRadius="8" Padding="6,2">
+                                    <TextBlock Text="SEGERA" 
+                                               FontSize="10" 
+                                               FontWeight="Bold"
+                                               Foreground="White"/>
+                                </Border>
+                            </StackPanel>
+                            
+                            <TextBlock Text="Parse EJ Native format Wincor/Diebold Nixdorf" 
+                                       FontSize="14" 
+                                       Foreground="#757575"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       Margin="0,0,0,25"/>
+                            
+                            <Button Content="DALAM PENGEMBANGAN" 
                                     IsEnabled="False"
                                     Height="45"
                                     FontSize="14"
