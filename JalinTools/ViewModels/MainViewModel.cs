@@ -1,8 +1,10 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Linq;
 using JalinTools.Models;
 using JalinTools.Services;
 using Microsoft.Win32;
@@ -27,6 +29,10 @@ namespace JalinTools.ViewModels
         private string _statusMessage = "Siap";
         private bool _isProcessing = false;
         private string _outputPreview = string.Empty;
+        private string _previewContent = string.Empty;
+        private bool _isPreviewVisible = false;
+        private bool _isPreviewExpanded = false;
+        private string _currentOutputPath = string.Empty;
 
         public MainViewModel()
         {
@@ -36,6 +42,9 @@ namespace JalinTools.ViewModels
             // Initialize commands
             BrowseFileCommand = new RelayCommand(_ => BrowseFile());
             ProcessCommand = new RelayCommand(_ => ProcessFile(), _ => CanProcess());
+            OpenFileCommand = new RelayCommand(_ => OpenOutputFile());
+            TogglePreviewCommand = new RelayCommand(_ => TogglePreview());
+            ToggleExpandCommand = new RelayCommand(_ => ToggleExpand());
         }
 
         #region Properties
@@ -123,6 +132,46 @@ namespace JalinTools.ViewModels
             }
         }
 
+        public string PreviewContent
+        {
+            get => _previewContent;
+            set
+            {
+                _previewContent = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsPreviewVisible
+        {
+            get => _isPreviewVisible;
+            set
+            {
+                _isPreviewVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string CurrentOutputPath
+        {
+            get => _currentOutputPath;
+            set
+            {
+                _currentOutputPath = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsPreviewExpanded
+        {
+            get => _isPreviewExpanded;
+            set
+            {
+                _isPreviewExpanded = value;
+                OnPropertyChanged();
+            }
+        }
+
         // For RadioButton binding
         public bool IsStandardFormat
         {
@@ -150,6 +199,9 @@ namespace JalinTools.ViewModels
 
         public ICommand BrowseFileCommand { get; }
         public ICommand ProcessCommand { get; }
+        public ICommand OpenFileCommand { get; }
+        public ICommand TogglePreviewCommand { get; }
+        public ICommand ToggleExpandCommand { get; }
 
         #endregion
 
@@ -214,6 +266,9 @@ namespace JalinTools.ViewModels
                     StatusMessage = "Pemrosesan selesai - File berhasil disimpan";
                     OutputPreview = $"Disimpan di: {outputPath}";
 
+                    // Load preview automatically
+                    await LoadPreviewAsync(outputPath);
+
                     MessageBox.Show(
                         $"File EJ berhasil diproses!\n\n" +
                         $"File output: {outputPath}\n\n" +
@@ -248,6 +303,75 @@ namespace JalinTools.ViewModels
             finally
             {
                 IsProcessing = false;
+            }
+        }
+
+        /// <summary>
+        /// Open output file in default editor
+        /// </summary>
+        private void OpenOutputFile()
+        {
+            if (!string.IsNullOrEmpty(CurrentOutputPath) && System.IO.File.Exists(CurrentOutputPath))
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = CurrentOutputPath,
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        $"Gagal membuka file:\n\n{ex.Message}",
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Toggle preview panel visibility
+        /// </summary>
+        private void TogglePreview()
+        {
+            IsPreviewVisible = !IsPreviewVisible;
+        }
+
+        /// <summary>
+        /// Toggle preview panel expansion
+        /// </summary>
+        private void ToggleExpand()
+        {
+            IsPreviewExpanded = !IsPreviewExpanded;
+        }
+
+        /// <summary>
+        /// Load file content for preview
+        /// </summary>
+        private async Task LoadPreviewAsync(string filePath)
+        {
+            try
+            {
+                // Read first 1000 lines for preview
+                var lines = await _fileService.ReadLinesAsync(filePath);
+                var previewLines = lines.Take(1000).ToArray();
+                
+                PreviewContent = string.Join(Environment.NewLine, previewLines);
+                
+                if (lines.Count > 1000)
+                {
+                    PreviewContent += $"\n\n... ({lines.Count - 1000} baris lainnya tidak ditampilkan)";
+                }
+
+                CurrentOutputPath = filePath;
+                IsPreviewVisible = true;
+            }
+            catch (Exception ex)
+            {
+                PreviewContent = $"Error loading preview: {ex.Message}";
             }
         }
 

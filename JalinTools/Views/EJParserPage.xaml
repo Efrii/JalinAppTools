@@ -280,6 +280,97 @@
                            HorizontalAlignment="Center"
                            Margin="0,0,0,10"
                            Visibility="{Binding OutputPreview, Converter={StaticResource StringNotEmptyToVisibilityConverter}}"/>
+
+                <!-- Preview Panel -->
+                <materialDesign:Card Margin="0,10,0,20" 
+                                     Padding="20" 
+                                     UniformCornerRadius="10"
+                                     materialDesign:ElevationAssist.Elevation="Dp3"
+                                     Visibility="{Binding IsPreviewVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel>
+                        <!-- Preview Header -->
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <materialDesign:PackIcon Grid.Column="0"
+                                                     Kind="FileEye" 
+                                                     Width="20" 
+                                                     Height="20" 
+                                                     Foreground="#755DE7"
+                                                     VerticalAlignment="Center"
+                                                     Margin="0,0,10,0"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="Pratinjau Hasil" 
+                                       FontSize="16" 
+                                       FontWeight="SemiBold" 
+                                       Foreground="#755DE7"
+                                       VerticalAlignment="Center"/>
+                            
+                            <Button Grid.Column="2"
+                                    Content="BUKA FILE"
+                                    Command="{Binding OpenFileCommand}"
+                                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                                    Height="32"
+                                    Margin="0,0,10,0"
+                                    FontSize="12"/>
+                            
+                            <Button Grid.Column="3"
+                                    Command="{Binding ToggleExpandCommand}"
+                                    Style="{StaticResource MaterialDesignIconButton}"
+                                    ToolTip="Perbesar/Perkecil"
+                                    Width="32"
+                                    Height="32">
+                                <materialDesign:PackIcon>
+                                    <materialDesign:PackIcon.Style>
+                                        <Style TargetType="materialDesign:PackIcon">
+                                            <Setter Property="Kind" Value="ArrowExpand"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsPreviewExpanded}" Value="True">
+                                                    <Setter Property="Kind" Value="ArrowCollapse"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </materialDesign:PackIcon.Style>
+                                </materialDesign:PackIcon>
+                            </Button>
+                        </Grid>
+
+                        <!-- Preview Content -->
+                        <Border BorderBrush="#E0E0E0" 
+                                BorderThickness="1" 
+                                CornerRadius="4"
+                                Background="#FAFAFA">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Auto">
+                                <ScrollViewer.Style>
+                                    <Style TargetType="ScrollViewer">
+                                        <Setter Property="MaxHeight" Value="300"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsPreviewExpanded}" Value="True">
+                                                <Setter Property="MaxHeight" Value="600"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ScrollViewer.Style>
+                                <TextBox Text="{Binding PreviewContent, Mode=OneWay}"
+                                         IsReadOnly="True"
+                                         TextWrapping="NoWrap"
+                                         FontFamily="Consolas"
+                                         FontSize="11"
+                                         Padding="10"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         VerticalScrollBarVisibility="Disabled"
+                                         HorizontalScrollBarVisibility="Disabled"/>
+                            </ScrollViewer>
+                        </Border>
+                    </StackPanel>
+                </materialDesign:Card>
             </StackPanel>
         </ScrollViewer>
 

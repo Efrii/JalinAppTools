@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -67,6 +68,13 @@ namespace JalinTools.Services
             string filename = $"EJ_{tid}_{formattedDate}.{extension}";
             
             return Path.Combine(outputFolder, filename);
+        }
+        /// <summary>
+        /// Read all lines from a file asynchronously
+        /// </summary>
+        public async Task<List<string>> ReadLinesAsync(string filePath)
+        {
+            return new List<string>(await File.ReadAllLinesAsync(filePath));
         }
     }
 }
