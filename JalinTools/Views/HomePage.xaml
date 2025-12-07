@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
 
         <!-- Navigasi Atas -->
-        <Grid Grid.Row="0" Background="#2196F3" Height="80">
+        <Grid Grid.Row="0" Background="#DB4231" Height="80">
             <Grid Margin="30,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -79,7 +79,7 @@
                             <materialDesign:PackIcon Kind="FileDocument" 
                                                      Width="60" 
                                                      Height="60" 
-                                                     Foreground="#2196F3"
+                                                     Foreground="#DB4231"
                                                      HorizontalAlignment="Center"
                                                      Margin="0,0,0,20"/>
                             
@@ -105,12 +105,12 @@
                                     HorizontalAlignment="Stretch">
                                 <Button.Style>
                                     <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
-                                        <Setter Property="Background" Value="#2196F3"/>
-                                        <Setter Property="BorderBrush" Value="#2196F3"/>
+                                        <Setter Property="Background" Value="#DB4231"/>
+                                        <Setter Property="BorderBrush" Value="#DB4231"/>
                                         <Setter Property="Foreground" Value="White"/>
                                         <Style.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#1976D2"/>
+                                                <Setter Property="Background" Value="#C13929"/>
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>

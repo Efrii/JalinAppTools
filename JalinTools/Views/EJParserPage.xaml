@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <!-- Navigasi Atas -->
-        <Grid Grid.Row="0" Background="#2196F3" Height="80">
+        <Grid Grid.Row="0" Background="#DB4231" Height="80">
             <Grid Margin="30,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -79,13 +79,13 @@
                             <materialDesign:PackIcon Kind="Folder" 
                                                      Width="20" 
                                                      Height="20" 
-                                                     Foreground="#2196F3"
+                                                     Foreground="#DB4231"
                                                      VerticalAlignment="Center"
                                                      Margin="0,0,10,0"/>
                             <TextBlock Text="Input File" 
                                        FontSize="16" 
                                        FontWeight="SemiBold" 
-                                       Foreground="#2196F3"/>
+                                       Foreground="#DB4231"/>
                         </StackPanel>
                         
                         <Grid>
@@ -123,13 +123,13 @@
                             <materialDesign:PackIcon Kind="Cog" 
                                                      Width="20" 
                                                      Height="20" 
-                                                     Foreground="#2196F3"
+                                                     Foreground="#DB4231"
                                                      VerticalAlignment="Center"
                                                      Margin="0,0,10,0"/>
                             <TextBlock Text="Pengaturan" 
                                        FontSize="16" 
                                        FontWeight="SemiBold" 
-                                       Foreground="#2196F3"/>
+                                       Foreground="#DB4231"/>
                         </StackPanel>
                         
                         <Grid>
@@ -200,13 +200,13 @@
                             <materialDesign:PackIcon Kind="FormatListBulleted" 
                                                      Width="20" 
                                                      Height="20" 
-                                                     Foreground="#2196F3"
+                                                     Foreground="#DB4231"
                                                      VerticalAlignment="Center"
                                                      Margin="0,0,10,0"/>
                             <TextBlock Text="Opsi Format" 
                                        FontSize="16" 
                                        FontWeight="SemiBold" 
-                                       Foreground="#2196F3"/>
+                                       Foreground="#DB4231"/>
                         </StackPanel>
                         
                         <StackPanel>
@@ -250,13 +250,13 @@
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                             <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="8"/>
-                            <Setter Property="Background" Value="#4CAF50"/>
-                            <Setter Property="BorderBrush" Value="#4CAF50"/>
+                            <Setter Property="Background" Value="#755DE7"/>
+                            <Setter Property="BorderBrush" Value="#755DE7"/>
                             <Setter Property="Foreground" Value="White"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#45A049"/>
-                                    <Setter Property="BorderBrush" Value="#45A049"/>
+                                    <Setter Property="Background" Value="#6344D9"/>
+                                    <Setter Property="BorderBrush" Value="#6344D9"/>
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Opacity" Value="0.5"/>
@@ -269,7 +269,7 @@
                 <!-- Pratinjau Output -->
                 <TextBlock Text="{Binding OutputPreview}"
                            FontSize="13"
-                           Foreground="#4CAF50"
+                           Foreground="#DB4231"
                            FontWeight="SemiBold"
                            TextWrapping="Wrap"
                            HorizontalAlignment="Center"
@@ -288,7 +288,7 @@
                              IsIndeterminate="True"
                              Width="80"
                              Height="80"
-                             Foreground="#2196F3"/>
+                             Foreground="#DB4231"/>
                 <TextBlock Text="Memproses..." 
                            FontSize="16" 
                            FontWeight="SemiBold"
@@ -309,7 +309,7 @@
                 <materialDesign:PackIcon Grid.Column="0"
                                           Kind="Information"
                                           VerticalAlignment="Center"
-                                          Foreground="#2196F3"
+                                          Foreground="#DB4231"
                                           Margin="0,0,10,0"/>
                 <TextBlock Grid.Column="1"
                            Text="{Binding StatusMessage}"
