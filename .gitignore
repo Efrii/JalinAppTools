@@ -395,3 +395,6 @@ FodyWeavers.xsd
 
 # Custom - Application output folders
 EJParse/
+
+# Custom - Reference files (not needed in repository)
+REFERENSI/
