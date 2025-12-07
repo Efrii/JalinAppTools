@@ -1,0 +1,176 @@
+<Page x:Class="JalinTools.Views.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Background="#F5F5F5"
+      Title="Beranda">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Navigasi Atas -->
+        <Grid Grid.Row="0" Background="#2196F3" Height="80">
+            <Grid Margin="30,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Logo dan Judul -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Tools" 
+                                             Width="40" 
+                                             Height="40" 
+                                             Foreground="White" 
+                                             VerticalAlignment="Center"
+                                             Margin="0,0,15,0"/>
+                    <TextBlock Text="JalinTools" 
+                               FontSize="28" 
+                               FontWeight="Bold" 
+                               Foreground="White" 
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Info Versi -->
+                <TextBlock Grid.Column="2" 
+                           Text="v1.2.0" 
+                           FontSize="12" 
+                           Foreground="White" 
+                           Opacity="0.8"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+
+        <!-- Konten Utama -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="40">
+                <!-- Bagian Sambutan -->
+                <StackPanel Margin="0,20,0,40">
+                    <TextBlock Text="Selamat Datang di JalinTools" 
+                               FontSize="36" 
+                               FontWeight="Bold" 
+                               Foreground="#212121"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Perangkat Lengkap EFTS Anda" 
+                               FontSize="18" 
+                               Foreground="#757575"
+                               HorizontalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+
+                <!-- Grid Alat -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Kartu Alat EJ Parser -->
+                    <materialDesign:Card Grid.Column="0" 
+                                         Padding="30" 
+                                         UniformCornerRadius="12"
+                                         materialDesign:ElevationAssist.Elevation="Dp4">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="FileDocument" 
+                                                     Width="60" 
+                                                     Height="60" 
+                                                     Foreground="#2196F3"
+                                                     HorizontalAlignment="Center"
+                                                     Margin="0,0,0,20"/>
+                            
+                            <TextBlock Text="Parser EJ" 
+                                       FontSize="24" 
+                                       FontWeight="SemiBold" 
+                                       Foreground="#212121"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,0,0,10"/>
+                            
+                            <TextBlock Text="Memproses file Electronic Journal menjadi format tertentu" 
+                                       FontSize="14" 
+                                       Foreground="#757575"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       Margin="0,0,0,25"/>
+                            
+                            <Button Content="BUKA ALAT" 
+                                    Click="OpenEJParser_Click"
+                                    Height="45"
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    HorizontalAlignment="Stretch">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                                        <Setter Property="Background" Value="#2196F3"/>
+                                        <Setter Property="BorderBrush" Value="#2196F3"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#1976D2"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </materialDesign:Card>
+
+                    <!-- Kartu Segera Hadir -->
+                    <materialDesign:Card Grid.Column="2" 
+                                         Padding="30" 
+                                         UniformCornerRadius="12"
+                                         materialDesign:ElevationAssist.Elevation="Dp2"
+                                         Opacity="0.6">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="Wrench" 
+                                                     Width="60" 
+                                                     Height="60" 
+                                                     Foreground="#9E9E9E"
+                                                     HorizontalAlignment="Center"
+                                                     Margin="0,0,0,20"/>
+                            
+                            <TextBlock Text="Alat Lainnya" 
+                                       FontSize="24" 
+                                       FontWeight="SemiBold" 
+                                       Foreground="#212121"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,0,0,10"/>
+                            
+                            <TextBlock Text="Alat tambahan akan segera hadir..." 
+                                       FontSize="14" 
+                                       Foreground="#757575"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       Margin="0,0,0,25"/>
+                            
+                            <Button Content="SEGERA HADIR" 
+                                    IsEnabled="False"
+                                    Height="45"
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    HorizontalAlignment="Stretch"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        </StackPanel>
+                    </materialDesign:Card>
+                </Grid>
+
+                <!-- Info Footer -->
+                <StackPanel Margin="0,60,0,0" HorizontalAlignment="Center">
+                    <TextBlock Text="Parser Electronic Journal EFTS &amp; Perangkat Lainnya" 
+                               FontSize="12" 
+                               Foreground="#9E9E9E"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="© 2025 JalinTools" 
+                               FontSize="11" 
+                               Foreground="#BDBDBD"
+                               HorizontalAlignment="Center"
+                               Margin="0,5,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
