@@ -20,19 +20,21 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Logo dan Judul -->
+                <!-- Logo Text -->
                 <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                    <materialDesign:PackIcon Kind="Tools" 
-                                             Width="40" 
-                                             Height="40" 
-                                             Foreground="White" 
-                                             VerticalAlignment="Center"
-                                             Margin="0,0,15,0"/>
-                    <TextBlock Text="JalinTools" 
-                               FontSize="28" 
+                    <TextBlock FontSize="32" 
                                FontWeight="Bold" 
-                               Foreground="White" 
-                               VerticalAlignment="Center"/>
+                               Foreground="White"
+                               VerticalAlignment="Center">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="2" 
+                                              BlurRadius="4" 
+                                              Opacity="0.3"
+                                              Color="Black"/>
+                        </TextBlock.Effect>
+                        <Run Text="Jalin" FontWeight="ExtraBold"/><!--
+                     --><Run Text="Tools" FontWeight="Light"/>
+                    </TextBlock>
                 </StackPanel>
 
                 <!-- Info Versi -->
@@ -55,7 +57,7 @@
                                FontWeight="Bold" 
                                Foreground="#212121"
                                HorizontalAlignment="Center"/>
-                    <TextBlock Text="Perangkat Lengkap EFTS Anda" 
+                    <TextBlock Text="Kumpulan Tools untuk EFTS" 
                                FontSize="18" 
                                Foreground="#757575"
                                HorizontalAlignment="Center"
@@ -83,7 +85,7 @@
                                                      HorizontalAlignment="Center"
                                                      Margin="0,0,0,20"/>
                             
-                            <TextBlock Text="Parser EJ" 
+                            <TextBlock Text="Parser EJ EFTS" 
                                        FontSize="24" 
                                        FontWeight="SemiBold" 
                                        Foreground="#212121"

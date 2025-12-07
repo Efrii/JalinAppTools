@@ -26,7 +26,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Tombol Kembali dan Judul -->
+                <!-- Tombol Kembali dan Logo -->
                 <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                     <Button Click="BackToHome_Click"
                             Style="{StaticResource MaterialDesignIconButton}"
@@ -38,22 +38,27 @@
                                                  Height="24" 
                                                  Foreground="White"/>
                     </Button>
-                    <materialDesign:PackIcon Kind="FileDocument" 
-                                             Width="40" 
-                                             Height="40" 
-                                             Foreground="White" 
-                                             VerticalAlignment="Center"
-                                             Margin="0,0,15,0"/>
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Parser EJ" 
-                                   FontSize="24" 
-                                   FontWeight="Bold" 
-                                   Foreground="White"/>
-                        <TextBlock Text="Parser Electronic Journal" 
-                                   FontSize="12" 
-                                   Foreground="White" 
-                                   Opacity="0.9"/>
-                    </StackPanel>
+                    <TextBlock FontSize="24" 
+                               FontWeight="Bold" 
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               Margin="0,0,15,0">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="2" 
+                                              BlurRadius="3" 
+                                              Opacity="0.3"
+                                              Color="Black"/>
+                        </TextBlock.Effect>
+                        <Run Text="Jalin" FontWeight="ExtraBold"/><!--
+                     --><Run Text="Tools" FontWeight="Light"/>
+                    </TextBlock>
+                    <TextBlock Text="Parser EJ" 
+                               FontSize="16" 
+                               FontWeight="SemiBold" 
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               Margin="15,0,0,0"
+                               Opacity="0.9"/>
                 </StackPanel>
 
                 <!-- Versi -->
