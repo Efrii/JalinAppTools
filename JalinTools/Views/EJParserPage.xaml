@@ -186,7 +186,7 @@
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                       materialDesign:HintAssist.Hint="Pilih Participant ID"
                                       FontSize="13">
-                                <ComboBoxItem Content="200" IsSelected="True"/>
+                                <ComboBoxItem Content="200"/>
                                 <ComboBoxItem Content="008"/>
                                 <ComboBoxItem Content="002"/>
                                 <ComboBoxItem Content="009"/>
