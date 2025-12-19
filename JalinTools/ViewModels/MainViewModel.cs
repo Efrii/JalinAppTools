@@ -24,8 +24,8 @@ namespace JalinTools.ViewModels
         private string _inputFilePath = string.Empty;
         private string _tid = string.Empty;
         private DateTime _selectedDate = DateTime.Now;
-        private string _selectedParticipantId = "200";
-        private EJParserFormat _selectedFormat = EJParserFormat.Lengkap;
+        private string _selectedParticipantId = string.Empty;
+        private EJParserFormat _selectedFormat = EJParserFormat.Standard;
         private string _statusMessage = "Siap";
         private bool _isProcessing = false;
         private string _outputPreview = string.Empty;
@@ -233,6 +233,7 @@ namespace JalinTools.ViewModels
         {
             return !string.IsNullOrWhiteSpace(InputFilePath) &&
                    !string.IsNullOrWhiteSpace(TID) &&
+                   !string.IsNullOrWhiteSpace(SelectedParticipantId) &&
                    !IsProcessing;
         }
 
