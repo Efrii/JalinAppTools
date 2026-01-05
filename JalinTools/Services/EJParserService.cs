@@ -94,11 +94,54 @@ namespace JalinTools.Services
                     if (ShouldSkipLine(line))
                         continue;
 
+                    // Check for transaction end without RRN - assign RRN 0
+                    if ((line.Contains("TRANSACTION ENDED") || line.Contains("Transaction Ended")) &&
+                        bufferedLines.Count > 0 && 
+                        string.IsNullOrEmpty(currentTraceNumber))
+                    {
+                        // Set RRN to 0 for local transaction
+                        currentTraceNumber = "0";
+                        
+                        // Use first buffered line's timestamp as transaction time
+                        currentTransactionTime = bufferedLines.FirstOrDefault()?.JournalTime ?? DateTime.Now;
+                        
+                        // Write all buffered lines with RRN 0
+                        foreach (var buffered in bufferedLines)
+                        {
+                            output.AppendLine($"{tid}|{currentTraceNumber}|{participantId}|" +
+                                $"{DateTimeHelper.FormatTimestampForOutput(currentTransactionTime.Value)}|" +
+                                $"{DateTimeHelper.FormatTimestampForOutput(buffered.JournalTime)}|" +
+                                $"{buffered.Content}");
+                        }
+                        bufferedLines.Clear();
+                        
+                        // Reset for next transaction
+                        currentTraceNumber = string.Empty;
+                        currentTransactionTime = null;
+                    }
+
                     // Check for transaction start - reset RRN and start buffering
                     if (line.Contains("CARD INSERTED") || 
                         line.Contains("CARD LESS SELECTED") || 
                         line.Contains("RESTART TRANSACTION"))
                     {
+                        // Before clearing, check if previous transaction had buffered data but no RRN
+                        if (bufferedLines.Count > 0 && string.IsNullOrEmpty(currentTraceNumber))
+                        {
+                            // Set RRN to 0 for previous incomplete transaction
+                            currentTraceNumber = "0";
+                            currentTransactionTime = bufferedLines.FirstOrDefault()?.JournalTime ?? DateTime.Now;
+                            
+                            // Write buffered lines with RRN 0
+                            foreach (var buffered in bufferedLines)
+                            {
+                                output.AppendLine($"{tid}|{currentTraceNumber}|{participantId}|" +
+                                    $"{DateTimeHelper.FormatTimestampForOutput(currentTransactionTime.Value)}|" +
+                                    $"{DateTimeHelper.FormatTimestampForOutput(buffered.JournalTime)}|" +
+                                    $"{buffered.Content}");
+                            }
+                        }
+                        
                         // Reset RRN and transaction time for new transaction
                         currentTraceNumber = string.Empty;
                         currentTransactionTime = null;
