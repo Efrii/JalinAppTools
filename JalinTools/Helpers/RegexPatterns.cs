@@ -17,6 +17,7 @@ namespace JalinTools.Helpers
         public static readonly Regex InfoTag = new Regex(@"\[INFO:\d+\]", RegexOptions.Compiled);
         public static readonly Regex PrintTag = new Regex(@"\[PRINT:\d+\]", RegexOptions.Compiled);
         public static readonly Regex DebugTag = new Regex(@"\[DEBUG:\d+\]", RegexOptions.Compiled);
+        public static readonly Regex TraceTag = new Regex(@"\[TRACE:\d+\]", RegexOptions.Compiled);
         
         // Combined removal patterns
         public static readonly Regex[] RemovalPatterns = new Regex[]

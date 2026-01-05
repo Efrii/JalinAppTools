@@ -124,8 +124,8 @@ namespace JalinTools.Services
                         bufferedLines.Clear();
                     }
 
-                    // Filter only [INFO:10] and [PRINT:10] lines for Standard format (lines 265-303)
-                    if (line.Contains("[INFO:10]") || line.Contains("[PRINT:10]"))
+                    // Filter [INFO:10], [PRINT:10], and TEmvModule::getEmvErrorData for Standard format
+                    if (line.Contains("[INFO:10]") || line.Contains("[PRINT:10]") || line.Contains("TEmvModule::getEmvErrorData"))
                     {
                         var journalTime = ExtractJournalTime(line);
                         if (journalTime == null)
@@ -325,6 +325,7 @@ namespace JalinTools.Services
                 remainingContent = RegexPatterns.InfoTag.Replace(remainingContent, "");
                 remainingContent = RegexPatterns.PrintTag.Replace(remainingContent, "");
                 remainingContent = RegexPatterns.DebugTag.Replace(remainingContent, "");
+                remainingContent = RegexPatterns.TraceTag.Replace(remainingContent, "");
 
                 // Trim whitespace
                 remainingContent = remainingContent.Trim();
