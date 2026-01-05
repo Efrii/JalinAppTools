@@ -21,7 +21,7 @@ namespace JalinTools.Helpers
         /// </summary>
         public static string FormatTimestampForOutput(DateTime dateTime)
         {
-            return dateTime.ToString("dd.MM.yyyy HH:mm:ss");
+            return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         /// <summary>

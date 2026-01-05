@@ -94,9 +94,14 @@ namespace JalinTools.Services
                     if (ShouldSkipLine(line))
                         continue;
 
-                    // Check for CARD INSERTED - start of new transaction (lines 241-244)
-                    if (line.Contains("CARD INSERTED"))
+                    // Check for transaction start - reset RRN and start buffering
+                    if (line.Contains("CARD INSERTED") || 
+                        line.Contains("CARD LESS SELECTED") || 
+                        line.Contains("RESTART TRANSACTION"))
                     {
+                        // Reset RRN and transaction time for new transaction
+                        currentTraceNumber = string.Empty;
+                        currentTransactionTime = null;
                         inTransaction = true;
                         bufferedLines.Clear();
                     }

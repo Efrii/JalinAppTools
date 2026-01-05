@@ -23,7 +23,7 @@ namespace JalinTools.Helpers
         {
             new Regex(@"\[TID:0x[A-Fa-f0-9]+\] \[INFO:\d+\]", RegexOptions.Compiled),
             new Regex(@"\[TID:0x[A-Fa-f0-9]+\] \[PRINT:\d+\]", RegexOptions.Compiled),
-            new Regex(@"iforme:\d+\] Motorized card reader detected", RegexOptions.Compiled),
+            new Regex(@"\[INFO:\d+\] Motorized card reader detected", RegexOptions.Compiled),
             new Regex(@"\[DEBUG:20\]", RegexOptions.Compiled),
             new Regex(@"XFS WFSAsyncExecute.*CMD: 30[23].*ReqID", RegexOptions.Compiled),
             new Regex(@"\(class\w+\.cpp:\d+\)", RegexOptions.Compiled)
