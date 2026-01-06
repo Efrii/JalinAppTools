@@ -11,7 +11,6 @@ namespace JalinTools
         {
             base.OnStartup(e);
 
-            // Global exception handling
             DispatcherUnhandledException += (sender, args) =>
             {
                 MessageBox.Show(

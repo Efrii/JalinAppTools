@@ -8,7 +8,7 @@
     <AssemblyName>JalinTools</AssemblyName>
     <RootNamespace>JalinTools</RootNamespace>
     <ApplicationIcon>Assets\jalintools_icon.ico</ApplicationIcon>
-    <VersionPrefix>1.2.3</VersionPrefix>
+    <VersionPrefix>1.3.0</VersionPrefix>
     <Copyright>Copyright © 2026 Chalin Developer</Copyright>
     <Authors>Chalin Developer</Authors>
     <Company>PT. Jalin Pembayaran Nusantara</Company>

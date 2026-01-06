@@ -12,13 +12,11 @@ namespace JalinTools
         {
             InitializeComponent();
             
-            // Navigate to home page on startup
             if (DataContext is ViewModels.NavigationViewModel navViewModel)
             {
                 navViewModel.NavigateToHome();
             }
 
-            // Update maximize icon on state change
             StateChanged += (s, e) => UpdateMaximizeIcon();
         }
 

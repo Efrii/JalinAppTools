@@ -71,13 +71,6 @@ namespace JalinTools.Services
 
                 foreach (var line in lines)
                 {
-                    // Skip supervisor sessions (lines 220-233)
-                    if (line.Contains("SUPERVISOR SAFE OPEN"))
-                    {
-                        skipSupervisorSession = true;
-                        continue;
-                    }
-
                     if (skipSupervisorSession)
                     {
                         if (line.Contains("CARD INSERTED") || line.Contains("CARD LESS SELECTED"))
@@ -90,7 +83,6 @@ namespace JalinTools.Services
                         }
                     }
 
-                    // Skip debug and specific lines (lines 236-238)
                     if (ShouldSkipLine(line))
                         continue;
 
@@ -149,7 +141,6 @@ namespace JalinTools.Services
                         bufferedLines.Clear();
                     }
 
-                    // Extract RRN and set as transaction time (lines 247-262)
                     string rrn = ExtractRRN(line);
                     if (!string.IsNullOrEmpty(rrn))
                     {
@@ -167,8 +158,7 @@ namespace JalinTools.Services
                         bufferedLines.Clear();
                     }
 
-                    // Filter [INFO:10], [PRINT:10], and TEmvModule::getEmvErrorData for Standard format
-                    if (line.Contains("[INFO:10]") || line.Contains("[PRINT:10]") || line.Contains("TEmvModule::getEmvErrorData"))
+                    if (line.Contains("[INFO:10]") || line.Contains("[PRINT:10]") || line.Contains("TEmvModule::getEmvErrorData") || line.Contains("reboot"))
                     {
                         var journalTime = ExtractJournalTime(line);
                         if (journalTime == null)
@@ -253,7 +243,7 @@ namespace JalinTools.Services
                             output.AppendLine(cassetteReport);
                             output.AppendLine();
                         }
-                        continue; // Skip adding the raw XML line
+                        continue;
                     }
 
                     // Try to process as CDM transaction
@@ -369,6 +359,7 @@ namespace JalinTools.Services
                 remainingContent = RegexPatterns.PrintTag.Replace(remainingContent, "");
                 remainingContent = RegexPatterns.DebugTag.Replace(remainingContent, "");
                 remainingContent = RegexPatterns.TraceTag.Replace(remainingContent, "");
+                remainingContent = RegexPatterns.WarnTag.Replace(remainingContent, "");
 
                 // Trim whitespace
                 remainingContent = remainingContent.Trim();
